@@ -1,26 +1,39 @@
 import React from 'react';
 import * as Styles from './styles';
-import {Text} from 'react-native';
 import HeaderComponent from './components/HeaderComponent';
+import RenderItem from './components/RenderItem';
+import {ActivityIndicator} from 'react-native';
 
-interface PropsItem {
+export interface PropsItem {
   item: {
+    admission_date: string;
     id: string;
+    image: string;
+    job: string;
     name: string;
+    phone: string;
   };
 }
 
-function List() {
+interface ListProps {
+  employees: PropsItem['item'][];
+  loading: boolean;
+}
+
+function List({employees, loading}: ListProps) {
   return (
-    <Styles.List
-      ListHeaderComponent={<HeaderComponent />}
-      renderItem={({item}: PropsItem) => <Text>{item.name}</Text>}
-      data={[
-        {id: '1', name: 'John Doe'},
-        {id: '2', name: 'Jane Doe'},
-        {id: '3', name: 'Michael Doe'},
-      ]}
-    />
+    <>
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <Styles.List
+          ListHeaderComponent={<HeaderComponent />}
+          renderItem={({item}: PropsItem) => <RenderItem item={item} />}
+          keyExtractor={item => item.id}
+          data={employees}
+        />
+      )}
+    </>
   );
 }
 
