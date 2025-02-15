@@ -4,6 +4,7 @@ import {
   moderateScale,
   verticalScale,
 } from '../../utils/metrics';
+import {TextInput} from 'react-native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -27,5 +28,8 @@ export const SeachContainer = styled.View`
 export const SeachInput = styled.TextInput.attrs({
   placeholderTextColor: '#1C1C1C',
 })`
+  flex: 1;
   padding-left: ${horizontalScale(10)}px;
-`;
+` as typeof TextInput;
+
+export const ListContainer = styled.View``;
